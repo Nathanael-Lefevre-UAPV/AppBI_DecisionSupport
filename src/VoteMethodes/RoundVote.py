@@ -5,7 +5,7 @@ class RoundVote(Vote):
     def __init__(self, dataframe):
         super(RoundVote, self).__init__(dataframe)
 
-        self.n_candidates = dataframe.shape[0]
+        self.n_candidates, self.n_elector = dataframe.shape
         self.all_eliminated = set()
         self.n_round = None
 
@@ -47,20 +47,30 @@ class RoundVote(Vote):
         log = dict()
 
         for round in range(1, self.n_round + 1):
-            vote_per_candidate = {i: len(self.electors_per_candidate[i]) for i in self.electors_per_candidate.keys()}
+            vote_per_candidate = {i: len(self.electors_per_candidate[i])
+                                  for i in self.electors_per_candidate.keys()}
+            percent_per_candidate = {i: vote_per_candidate[i] * 100 / self.n_elector
+                                     for i in self.electors_per_candidate.keys()}
             candidate_order = [c[0] for c in sorted(vote_per_candidate.items(), key=lambda item: item[1], reverse=True)]
             best_candidates = candidate_order[:self.n_round + 1 - round]
             eliminated = candidate_order[self.n_round + 1 - round:]
 
-            log[f"tour_{round}"] = {"vote_per_candidate": vote_per_candidate,
+            log[round] = {"vote_per_candidate": vote_per_candidate,
+                                    "percent_per_candidate": percent_per_candidate,
                                     "candidate_order": candidate_order,
                                     "best_candidates": best_candidates,
                                     "eliminated": eliminated}
             if round != self.n_round:
                 self.next_round(eliminated=eliminated)
 
+            #'''
+            if percent_per_candidate[best_candidates[0]] > 50.:
+                break
+            #'''
+
         winner = {"candidate": best_candidates[0],
-                  "vote": vote_per_candidate[best_candidates[0]]}
+                  "vote": vote_per_candidate[best_candidates[0]],
+                  "percentage": percent_per_candidate[best_candidates[0]]}
         return {"winner": winner,
                 "log": log}
 

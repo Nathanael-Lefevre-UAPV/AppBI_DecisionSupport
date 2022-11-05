@@ -6,18 +6,25 @@ from VoteMethodes.Borda import Borda
 from VoteMethodes.Condorcet import Condorcet
 from Utils.ColorPrinter import *
 
-def printSep():
+def printSep(colorPrinter):
     print()
-    greenprint("----------------------")
+    colorPrinter("-" * 150)
     print()
+
 
 if __name__ == "__main__":
-    profile_1 = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil3.csv", header=None)
-    blueprint("Dataframe")
-    print(profile_1)
+    for numProfil in range(1, 4):
+        printSep(blueprint)
+        print(f"profil{numProfil}.csv")
+        printSep(blueprint)
+        profil = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil{numProfil}.csv", header=None)
+        blueprint("Dataframe ")
+        print(profil)
 
-    for voteMethod in [OneRoundVote, TwoRoundVote, AlternativeRoundVote, Borda, Condorcet]:
-        printSep()
-        blueprint(voteMethod.__name__)
-        voter = voteMethod(profile_1)
-        pprint(voter.vote())
+        for voteMethod in [OneRoundVote, TwoRoundVote, AlternativeRoundVote, Borda, Condorcet]:
+            printSep(greenprint)
+            blueprint(voteMethod.__name__)
+            voter = voteMethod(profil)
+            pprint(voter.vote())
+
+        print()
