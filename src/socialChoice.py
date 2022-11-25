@@ -6,6 +6,8 @@ from VoteMethodes.Borda import Borda
 from VoteMethodes.Condorcet import Condorcet
 from Utils.ColorPrinter import *
 
+from DataAnalytics.DataAnalyser import DataAnalyser
+
 
 def print_sep(color_printer):
     print()
@@ -14,6 +16,7 @@ def print_sep(color_printer):
 
 
 if __name__ == "__main__":
+    """
     for numProfil in range(1, 4):
         print_sep(blueprint)
         print(f"profil{numProfil}.csv")
@@ -29,3 +32,8 @@ if __name__ == "__main__":
             pprint(voter.vote())
 
         print()
+    """
+
+    dataAnalyser = DataAnalyser()
+    profil = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil1.csv", header=None)
+    dataAnalyser.plot_candidates_vote_ranking(profil)
