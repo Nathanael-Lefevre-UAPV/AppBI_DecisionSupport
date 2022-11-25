@@ -14,7 +14,6 @@ class PrinterReplace:
         self.first_line = True
 
     def colorprint(self, color, *args, end='\n'):
-        # noinspection PyBroadException
         sys.stdout.write('\r')
         sys.stdout.write(color + Style.BRIGHT)
         sys.stdout.write(*args)
@@ -33,9 +32,11 @@ class PrinterReplace:
             for arg in args:
                 sys.stdout.write(arg)
 
+
 fore_to_html_color = {Fore.BLUE: "#00aaff",
                       Fore.RED: "#ff0000",
                       Fore.GREEN: "#00cc44"}
+
 
 def colorprint(color, *args, end='\n'):
     # noinspection PyBroadException
