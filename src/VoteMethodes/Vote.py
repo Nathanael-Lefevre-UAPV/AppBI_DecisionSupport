@@ -9,5 +9,7 @@ class Vote():
         """
         winner = 1
         log = {"tour_1": {"votes": {}}}
+
+        # Exemple de retour
         return {"winner": winner,
                 "log": log}
