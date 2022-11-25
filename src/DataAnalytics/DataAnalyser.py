@@ -15,10 +15,8 @@ class DataAnalyser:
         width = 0.35
 
         fig, ax = plt.subplots()
-        nb_place_pos += 1
-        shift = np.arange(nb_place_pos) - nb_place_pos / 2
-        input(shift)
-        for place_pos, add in zip(range(1, nb_place_pos+1), [-6, 0, 6]):
+        shift = 6 * np.arange(nb_place_pos) - (nb_place_pos-1) * 0.5
+        for place_pos, add in zip(range(1, nb_place_pos+1), shift):
             rects = ax.bar(2*labels + (add * width / nb_place_pos), rank[place_pos], width, label=place_pos)
             ax.bar_label(rects, padding=3)
 
