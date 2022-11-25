@@ -11,18 +11,21 @@ class DataAnalyser:
             for candidate_num in range(profil.shape[0]):
                 rank[place_pos+1].append(sum(profil.loc[place_pos] == candidate_num+1))
 
-        labels = [i for i in range(profil.shape[0])]
-        width = 0.20
-        x = [i-width/nb_place_pos for i in range(nb_place_pos+1)]
+        labels = np.array([i for i in range(profil.shape[0])])
+        width = 0.35
+
         fig, ax = plt.subplots()
-        for place_pos in range(1, nb_place_pos+1):
-            rects = ax.bar(x[place_pos], rank[place_pos], width, label=place_pos)
+        nb_place_pos += 1
+        shift = np.arange(nb_place_pos) - nb_place_pos / 2
+        input(shift)
+        for place_pos, add in zip(range(1, nb_place_pos+1), [-6, 0, 6]):
+            rects = ax.bar(2*labels + (add * width / nb_place_pos), rank[place_pos], width, label=place_pos)
             ax.bar_label(rects, padding=3)
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel('Scores')
         ax.set_title('Scores by group and gender')
-        ax.set_xticks(labels, labels)
+        ax.set_xticks(2*labels, labels)
         ax.legend()
 
         fig.tight_layout()
