@@ -23,8 +23,8 @@ class DataAnalyser:
             ax.bar_label(rects, padding=3)
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
-        ax.set_ylabel('Scores')
-        ax.set_title('Scores by group and gender')
+        ax.set_ylabel('NB Vote')
+        ax.set_title('Number of votes by candidate and rank')
         ax.set_xticks(2*labels, labels)
         ax.legend()
 
