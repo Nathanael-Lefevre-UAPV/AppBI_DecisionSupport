@@ -16,7 +16,6 @@ def print_sep(color_printer):
 
 
 if __name__ == "__main__":
-    """
     for numProfil in range(1, 4):
         print_sep(blueprint)
         print(f"profil{numProfil}.csv")
@@ -24,6 +23,10 @@ if __name__ == "__main__":
         profil = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil{numProfil}.csv", header=None)
         blueprint("Dataframe ")
         print(profil)
+        blueprint("Data Analysis")
+        dataAnalyser = DataAnalyser(profil, profil_name=f"profil{numProfil}")
+        dataAnalyser.plot_candidates_vote_ranking()
+        dataAnalyser.plot_candidates_ranking_mean()
 
         for voteMethod in [OneRoundVote, TwoRoundVote, AlternativeRoundVote, Borda, Condorcet]:
             print_sep(greenprint)
@@ -32,8 +35,3 @@ if __name__ == "__main__":
             pprint(voter.vote())
 
         print()
-    """
-
-    dataAnalyser = DataAnalyser()
-    profil = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil1.csv", header=None)
-    dataAnalyser.plot_candidates_vote_ranking(profil)
