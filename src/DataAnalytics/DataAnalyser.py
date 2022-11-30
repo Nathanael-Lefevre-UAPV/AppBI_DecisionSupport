@@ -3,6 +3,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+from Utils.pathsDefinition import *
+
 
 class DataAnalyser:
     def __init__(self, profil, profil_name):
@@ -36,7 +38,7 @@ class DataAnalyser:
         ax.legend()
 
         fig.tight_layout()
-        plt.savefig(f"src/fig/{self.profilName}-{title.replace(' ', '_')}.png")
+        plt.savefig(figPath / f"{self.profilName}-{title.replace(' ', '_')}.png")
         plt.show()
 
         print(rank)
@@ -63,6 +65,6 @@ class DataAnalyser:
 
         fig.tight_layout()
 
-        plt.savefig(f"src/fig/{self.profilName}-{title.replace(' ', '_')}.png")
+        plt.savefig(figPath / f"{self.profilName}-{title.replace(' ', '_')}.png")
         plt.show()
         print(mean_rank)
