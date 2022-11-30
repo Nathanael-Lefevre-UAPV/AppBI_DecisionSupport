@@ -1,0 +1,19 @@
+Bordas:
+
+\begin{align*}
+&\text{Soit } C \text{ l'ensemble des candidats}\\
+&\text{Soit } E \text{ l'ensemble des électeurs}\\
+&\text{Soit } V = [v_{i, j}], (i, j) \in [1, |E|] * [1, |C|] \text{ la matrice des classements}\\
+&\text{Soit } S = [s_j], k \in [1, |C|] \text{ le score de borda pour les candidats}\\
+&\text{On note } ind \text{ la fonction indicatrice}\\
+&\text{Alors le score de Borda se calcule ainsi :}\\
+&S_k = \underset{j \in [1, |C|]}{\sum}   (|C| - j + 1) \underset{i \in [1, |E|]}{\sum} ind\{V_{i,j} == k\}
+\end{align*}
+
+Rank Mean:
+
+\begin{align*}
+&\text{Or notre rang moyen se calcule comme:}\\
+&R_k = \frac{\underset{j \in [1, |C|]}{\sum}   (|C| - j + 1) \underset{i \in [1, |E|]}{\sum} ind\{V_{i,j} == k\} ]}{E}\\
+&\text{D'où: } R_k = \frac{S_k}{|E|}
+\end{align*}
