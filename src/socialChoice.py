@@ -16,6 +16,7 @@ def print_sep(color_printer):
 
 
 if __name__ == "__main__":
+    winners = {}
     for numProfil in range(1, 4):
         print_sep(blueprint)
         print(f"profil{numProfil}.csv")
@@ -28,15 +29,32 @@ if __name__ == "__main__":
         dataAnalyser.plot_candidates_vote_ranking()
         dataAnalyser.plot_candidates_ranking_mean()
 
+        winners[numProfil] = dict()
         for voteMethod in [OneRoundVote, TwoRoundVote, AlternativeRoundVote, Borda, Condorcet]:
             print_sep(greenprint)
             blueprint(voteMethod.__name__)
             voter = voteMethod(profil)
-            pprint(voter.vote())
+            vote = voter.vote()
+            pprint(vote)
+            winners[numProfil][voteMethod.__name__] = vote['winner']
+            print()
 
-        dataAnalyser.boostrap_analysis()
+    print_sep(blueprint)
+    print(f"Winners")
+    print_sep(blueprint)
 
+    pprint(winners)
+
+    print_sep(greenprint)
+
+    # Afficher tableau des winners
+    for numProfile, infos in winners.items():
         print()
+        print("Profile", numProfile)
+        for method, winner in winners[numProfile].items():
+            if type(winner) is dict:
+                winner = winner['candidate']
+            print(method.ljust(20), winner)
 
     # Analyse de robustesse
 
