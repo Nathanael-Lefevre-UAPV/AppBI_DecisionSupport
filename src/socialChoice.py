@@ -34,4 +34,19 @@ if __name__ == "__main__":
             voter = voteMethod(profil)
             pprint(voter.vote())
 
+        dataAnalyser.boostrap_analysis()
+
         print()
+
+    # Analyse de robustesse
+
+    redprint("Appuyez sur entrer pour procéder à l'analyse de Robustesse")
+    redprint("Attention: procédure rapide pour le profil 1 (10 min)")
+    redprint("Mais lente (> 70min) pour les autres profils")
+    input("Entrer pour continuer")
+    for numProfil in range(1, 4):
+        profil = pd.read_csv(f"{dataPaths[CHOIX_SOCIAL]}/profil{numProfil}.csv", header=None)
+        dataAnalyser = DataAnalyser(profil, profil_name=f"profil{numProfil}")
+        dataAnalyser.boostrap_analysis()
+
+

@@ -35,6 +35,6 @@ class Condorcet(Vote):
             winner = best + 1  # real number of the winner (because list starts with index 0)
 
         res_battles_summed = {key+1: res_battles_summed[key] for key in range(len(res_battles_summed))}
-        return {"winner": winner,  # winner
+        return {"winner": {"candidate": winner},  # winner
                 "log": {"candidates_score": res_battles_summed,
                         "battles_matrix": self.res_battles}}  # list of number of wins

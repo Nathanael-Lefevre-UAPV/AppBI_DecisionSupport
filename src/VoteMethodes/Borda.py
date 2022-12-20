@@ -16,5 +16,5 @@ class Borda(Vote):
                 self.candidates_score[candidate] += bonus
 
         candidates_score = {key+1: self.candidates_score[key] for key in range(len(self.candidates_score))}
-        return {"winner": np.argmax(self.candidates_score) + 1,  # real number of the winner (index winner+1 in list)
+        return {"winner": {"candidate": np.argmax(self.candidates_score) + 1},  # real number of the winner (index winner+1 in list)
                 "log": {"candidates_score": candidates_score}}  # score list
